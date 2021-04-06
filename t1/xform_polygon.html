@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<script src ="src/numjs.min.js"> </script>
+<script src="src/basic.renderer.js"> </script>
+
+<body>
+    
+<div>
+    <canvas id="raster_image"></canvas>
+</div>
+
+
+<script>
+
+    var width = 320;
+    var heigth = 200;
+
+    var scene = [
+        {  
+            shape: "polygon",
+            vertices: [ [50.,25.], [300., 25.], [300., 140.], [160., 180.] ],
+            color: [121, 67, 91],
+            xform: [[0.5, 0, 15], [0, 0.75, 20], [0, 0, 1]]
+        }
+    ]
+
+    var screen = new BasicRenderer.Screen(width, heigth, scene);
+    screen.rasterize();
+    screen.update();
+
+</script>
+
+
+</body>
+</html>

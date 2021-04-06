@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<script src ="src/numjs.min.js"> </script>
+<script src="src/basic.renderer.js"> </script>
+
+<body>
+    
+<div>
+    <canvas id="raster_image"></canvas>
+</div>
+
+
+<script>
+
+    var width = 328;
+    var heigth = 252;
+
+    var scene = [
+        {  
+            shape: "triangle",
+            vertices: [ [50.,25.], [300., 100.], [200., 150.] ],
+            color: [0, 250, 0]
+        },
+        {  
+            shape: "triangle",
+            vertices: [ [0.,0.], [50., 0.], [25., 80.] ],
+            color: [250, 0, 0]    
+        },
+        {
+            shape:"circle",
+            center:  [200, 200] ,
+            radius: 40,
+            color: [0, 0, 250]
+        },
+        {
+            shape:"circle",
+            center:  [170, 200] ,
+            radius: 12,
+            color: [0, 250, 250]
+        }
+    ]
+
+    var screen = new BasicRenderer.Screen(width, heigth, scene);
+    screen.rasterize();
+    screen.update();
+
+</script>
+
+
+</body>
+</html>

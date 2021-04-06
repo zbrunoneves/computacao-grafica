@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<script src ="src/numjs.min.js"> </script>
+<script src="src/basic.renderer.js"> </script>
+
+<body>
+    
+<div>
+    <canvas id="raster_image"></canvas>
+</div>
+
+
+<script>
+
+    var width = 320;
+    var heigth = 220;
+
+    var scene = [
+        {
+            shape:"circle",
+            center:  [100, 100] ,
+            radius: 80,
+            color: [0, 0, 250]
+        }
+    ]
+
+    var screen = new BasicRenderer.Screen(width, heigth, scene);
+    screen.rasterize();
+    screen.update();
+
+</script>
+
+
+</body>
+</html>
