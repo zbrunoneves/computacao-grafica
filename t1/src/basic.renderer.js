@@ -28,11 +28,8 @@
             }
             else {
                 i++;
-            }
-            
+            }  
         }
-
-        inside(3, 2, primitive);
     }
 
     function scalar_product(a, b) {
