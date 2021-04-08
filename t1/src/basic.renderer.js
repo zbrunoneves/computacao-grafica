@@ -11,7 +11,7 @@
 
         primitive.triangles = [];
 
-        let vertices = primitive.vertices;
+        let vertices = [...primitive.vertices];
 
         let i = 0;
         while(vertices.length >= 3) {
@@ -122,6 +122,24 @@
 
             return false;
     }
+
+    function define_bounding_box(primitive) {
+        let xMin = Number.MAX_VALUE;
+        let xMax = Number.MIN_VALUE;
+
+        let yMin = Number.MAX_VALUE;
+        let yMax = Number.MIN_VALUE;
+
+        for(var vertice of primitive.vertices) {
+            xMin = Math.min(xMin, vertice[0]);
+            xMax = Math.max(xMax, vertice[0]);
+            
+            yMin = Math.min(yMin, vertice[1]);
+            yMax = Math.max(yMax, vertice[1]);
+        }
+
+        primitive.boundingBox = {xMin, xMax, yMin, yMax};
+    }
         
     
     function Screen( width, height, scene ) {
@@ -143,6 +161,14 @@
                     // do some processing
                     // for now, only copies each primitive to a new list
 
+                    if(primitive.shape === "circle")
+                        process_circle(primitive); 
+
+                    if(primitive.hasOwnProperty("xform"))
+                        apply_xform(primitive);
+
+                    define_bounding_box(primitive);
+
                     preprop_scene.push( primitive );
                     
                 }
@@ -161,19 +187,14 @@
                 // In this loop, the image attribute must be updated after the rasterization procedure.
                 for( var primitive of this.scene ) {
 
-                    if(primitive.shape === "circle")
-                        process_circle(primitive); 
-
-                    if(primitive.hasOwnProperty("xform"))
-                        apply_xform(primitive);
-
                     ear_clipping(primitive);
 
+                    const boundingBox = primitive.boundingBox;
                     // Loop through all pixels
                     // Use bounding boxes in order to speed up this loop
-                    for (var i = 0; i < this.width; i++) {
+                    for (var i = Math.floor(boundingBox.xMin); i <= Math.floor(boundingBox.xMax); i++) {
                         var x = i + 0.5;
-                        for( var j = 0; j < this.height; j++) {
+                        for( var j = Math.floor(boundingBox.yMin); j <= Math.floor(boundingBox.yMax); j++) {
                             var y = j + 0.5;
 
                             // First, we check if the pixel center is inside the primitive 
@@ -186,8 +207,6 @@
                         }
                     }
                 }
-                
-               
               
             },
 
