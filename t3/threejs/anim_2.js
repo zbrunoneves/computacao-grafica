@@ -40,7 +40,7 @@ Object.assign( PlayGuitar.prototype, {
                 stats.update();
                 renderer.render(scene, camera);    
             })
-            .repeat(3)
+            .repeat(5)
             .yoyo(true);
 
         let upperLeftArmTween = new TWEEN.Tween( {theta:0} )
@@ -99,7 +99,7 @@ Object.assign( PlayGuitar.prototype, {
                 stats.update();
                 renderer.render(scene, camera);    
             })
-            .delay(2000);
+            .delay(3400);
 
         let upperLeftArmTweenBack = new TWEEN.Tween( {theta:Math.PI/6} )
             .to( {theta:0 }, 500)
@@ -118,7 +118,7 @@ Object.assign( PlayGuitar.prototype, {
                 left_upper_arm.updateMatrixWorld(true);
                 stats.update();
                 renderer.render(scene, camera);    
-            }).delay(2000);
+            }).delay(3400);
 
         let upperArmTweenBack = new TWEEN.Tween( {theta:Math.PI/6} )
             .to( {theta:0 }, 500)

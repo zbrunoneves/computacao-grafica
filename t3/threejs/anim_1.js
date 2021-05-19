@@ -55,6 +55,8 @@ Object.assign( WaveAnimation.prototype, {
                 stats.update();
                 renderer.render(scene, camera);    
             })
+            .repeat(6)
+            .yoyo(true);
         
         let handTweenBack = new TWEEN.Tween( {theta:Math.PI-0.3} )
             .to( {theta:Math.PI }, 200)
@@ -70,7 +72,6 @@ Object.assign( WaveAnimation.prototype, {
                 stats.update();
                 renderer.render(scene, camera);    
             })
-            .delay(200)
 
         let lowerArmTweenBack = new TWEEN.Tween( {theta:Math.PI/2} )
             .to( {theta:0 }, 500)
@@ -111,12 +112,11 @@ Object.assign( WaveAnimation.prototype, {
             })
 
 
-        upperArmTween.chain(lowerArmTween);
+        upperArmTween.start();    
+        lowerArmTween.start()
         lowerArmTween.chain(handTween);
         handTween.chain(handTweenBack);
-        handTweenBack.chain(lowerArmTweenBack);
-        lowerArmTweenBack.chain(upperArmTweenBack);
-        upperArmTween.start();    
+        handTweenBack.chain(lowerArmTweenBack,upperArmTweenBack);
     },
     animate: function(time) {
         window.requestAnimationFrame(this.animate.bind(this));
