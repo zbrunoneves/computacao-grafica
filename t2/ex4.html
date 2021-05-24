@@ -27,9 +27,21 @@
 
         var kernel = "laplace"; 
         var xform = nj.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]]);
-        var imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel, xform);
+        var imgprocesser;
+        
+        
+        function wait() {
+          if(img_load_flag == false) {
+            window.setTimeout(wait, 100); /* this checks the flag every 100 milliseconds*/
+          } 
+          else {
+            imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel, xform);;
+            imgprocesser.update();
+          }
+        }
 
-        imgprocesser.update();
+        wait();
+
 
     </script>
 

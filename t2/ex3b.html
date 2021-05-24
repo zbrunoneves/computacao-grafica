@@ -26,9 +26,19 @@
     <script>
 
         var kernel = "sobel"; 
-        var imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel, null, 'extend');
+        var imgprocesser;
+        
+        function wait() {
+          if(img_load_flag == false) {
+            window.setTimeout(wait, 100); /* this checks the flag every 100 milliseconds*/
+          } 
+          else {
+            imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel, null, 'extend');
+            imgprocesser.update();
+          }
+        }
+        wait();
 
-        imgprocesser.update();
 
     </script>
 

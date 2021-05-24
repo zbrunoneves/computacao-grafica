@@ -25,10 +25,20 @@
     
     <script>
 
-        var kernel = "sobel"; 
-        var imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel);
+        var kernel = "sobel";
+        var imgprocesser;
 
-        imgprocesser.update();
+        function wait() {
+          if(img_load_flag == false) {
+            window.setTimeout(wait, 100); /* this checks the flag every 100 milliseconds*/
+          } 
+          else {
+            imgprocesser = new ImageProcessing.ImageProcesser(gray_img, kernel);
+            imgprocesser.update();
+          }
+        }
+        wait();
+
 
     </script>
 
