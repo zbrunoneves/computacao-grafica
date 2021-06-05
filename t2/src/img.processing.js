@@ -28,7 +28,7 @@
             var first_y_pixel = 1;
             var last_y_pixel = this.width - 1;
 
-            if(border == 'extended') {
+            if(border == 'extend') {
                 first_x_pixel = 0;
                 last_x_pixel = this.height;
                 first_y_pixel = 0;
@@ -58,7 +58,7 @@
 
         box: function(i, j) {
 
-            var sum =   this.img.get(i-1<0?i:i-1, j-1<0?j:j-1<0?j:j-1) +
+            var sum =   this.img.get(i-1<0?i:i-1, j-1<0?j:j-1) +
                         this.img.get(i-1<0?i:i-1, j) +
                         this.img.get(i-1<0?i:i-1, j+1==this.width?j:j+1) +
                         this.img.get(i, j-1<0?j:j-1) +
